@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiyuan.mapper.BehospitalMapper">
+  <resultMap id="BaseResultMap" type="com.yiyuan.pojo.Behospital">
+    <id column="beH_id" jdbcType="INTEGER" property="beH_id" />
+    <result column="beH_nursepeople" jdbcType="INTEGER" property="beH_nursepeople" />
+    <result column="beH_patBed" jdbcType="INTEGER" property="beH_patBed" />
+    <result column="beh_antecedent" jdbcType="DOUBLE" property="beh_antecedent" />
+    <result column="beH_illness" jdbcType="VARCHAR" property="beH_illness" />
+    <result column="beH_closePrice" jdbcType="INTEGER" property="beH_closePrice" />
+    <result column="beH_state" jdbcType="INTEGER" property="beH_state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    beH_id, beH_nursepeople, beH_patBed, beh_antecedent, beH_illness, beH_closePrice, 
+    beH_state
+  </sql>
+  <select id="selectByExample" parameterType="com.yiyuan.pojo.BehospitalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from behospital
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from behospital
+    where beH_id = #{beH_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from behospital
+    where beH_id = #{beH_id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yiyuan.pojo.BehospitalExample">
+    delete from behospital
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yiyuan.pojo.Behospital">
+    insert into behospital (beH_id, beH_nursepeople, beH_patBed, 
+      beh_antecedent, beH_illness, beH_closePrice, 
+      beH_state)
+    values (#{beH_id,jdbcType=INTEGER}, #{beH_nursepeople,jdbcType=INTEGER}, #{beH_patBed,jdbcType=INTEGER}, 
+      #{beh_antecedent,jdbcType=DOUBLE}, #{beH_illness,jdbcType=VARCHAR}, #{beH_closePrice,jdbcType=INTEGER}, 
+      #{beH_state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yiyuan.pojo.Behospital">
+    insert into behospital
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="beH_id != null">
+        beH_id,
+      </if>
+      <if test="beH_nursepeople != null">
+        beH_nursepeople,
+      </if>
+      <if test="beH_patBed != null">
+        beH_patBed,
+      </if>
+      <if test="beh_antecedent != null">
+        beh_antecedent,
+      </if>
+      <if test="beH_illness != null">
+        beH_illness,
+      </if>
+      <if test="beH_closePrice != null">
+        beH_closePrice,
+      </if>
+      <if test="beH_state != null">
+        beH_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="beH_id != null">
+        #{beH_id,jdbcType=INTEGER},
+      </if>
+      <if test="beH_nursepeople != null">
+        #{beH_nursepeople,jdbcType=INTEGER},
+      </if>
+      <if test="beH_patBed != null">
+        #{beH_patBed,jdbcType=INTEGER},
+      </if>
+      <if test="beh_antecedent != null">
+        #{beh_antecedent,jdbcType=DOUBLE},
+      </if>
+      <if test="beH_illness != null">
+        #{beH_illness,jdbcType=VARCHAR},
+      </if>
+      <if test="beH_closePrice != null">
+        #{beH_closePrice,jdbcType=INTEGER},
+      </if>
+      <if test="beH_state != null">
+        #{beH_state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yiyuan.pojo.BehospitalExample" resultType="java.lang.Long">
+    select count(*) from behospital
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update behospital
+    <set>
+      <if test="record.beH_id != null">
+        beH_id = #{record.beH_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.beH_nursepeople != null">
+        beH_nursepeople = #{record.beH_nursepeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.beH_patBed != null">
+        beH_patBed = #{record.beH_patBed,jdbcType=INTEGER},
+      </if>
+      <if test="record.beh_antecedent != null">
+        beh_antecedent = #{record.beh_antecedent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.beH_illness != null">
+        beH_illness = #{record.beH_illness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beH_closePrice != null">
+        beH_closePrice = #{record.beH_closePrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.beH_state != null">
+        beH_state = #{record.beH_state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update behospital
+    set beH_id = #{record.beH_id,jdbcType=INTEGER},
+      beH_nursepeople = #{record.beH_nursepeople,jdbcType=INTEGER},
+      beH_patBed = #{record.beH_patBed,jdbcType=INTEGER},
+      beh_antecedent = #{record.beh_antecedent,jdbcType=DOUBLE},
+      beH_illness = #{record.beH_illness,jdbcType=VARCHAR},
+      beH_closePrice = #{record.beH_closePrice,jdbcType=INTEGER},
+      beH_state = #{record.beH_state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yiyuan.pojo.Behospital">
+    update behospital
+    <set>
+      <if test="beH_nursepeople != null">
+        beH_nursepeople = #{beH_nursepeople,jdbcType=INTEGER},
+      </if>
+      <if test="beH_patBed != null">
+        beH_patBed = #{beH_patBed,jdbcType=INTEGER},
+      </if>
+      <if test="beh_antecedent != null">
+        beh_antecedent = #{beh_antecedent,jdbcType=DOUBLE},
+      </if>
+      <if test="beH_illness != null">
+        beH_illness = #{beH_illness,jdbcType=VARCHAR},
+      </if>
+      <if test="beH_closePrice != null">
+        beH_closePrice = #{beH_closePrice,jdbcType=INTEGER},
+      </if>
+      <if test="beH_state != null">
+        beH_state = #{beH_state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where beH_id = #{beH_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yiyuan.pojo.Behospital">
+    update behospital
+    set beH_nursepeople = #{beH_nursepeople,jdbcType=INTEGER},
+      beH_patBed = #{beH_patBed,jdbcType=INTEGER},
+      beh_antecedent = #{beh_antecedent,jdbcType=DOUBLE},
+      beH_illness = #{beH_illness,jdbcType=VARCHAR},
+      beH_closePrice = #{beH_closePrice,jdbcType=INTEGER},
+      beH_state = #{beH_state,jdbcType=INTEGER}
+    where beH_id = #{beH_id,jdbcType=INTEGER}
+  </update>
+</mapper>
