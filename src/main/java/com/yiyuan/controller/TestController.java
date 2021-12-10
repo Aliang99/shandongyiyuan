@@ -14,7 +14,7 @@ public class TestController {
         return "hello";
     }
 
-    @RequestMapping("index.do")
+    @RequestMapping("index")
     public ModelAndView test2(){
         System.out.println("index");
         ModelAndView modelAndView = new ModelAndView();
