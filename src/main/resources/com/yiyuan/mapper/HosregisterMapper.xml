@@ -3,6 +3,7 @@
 <mapper namespace="com.yiyuan.mapper.HosregisterMapper">
   <resultMap id="BaseResultMap" type="com.yiyuan.pojo.Hosregister">
     <id column="hosR_id" jdbcType="INTEGER" property="hosR_id" />
+    <result column="hosR_name" jdbcType="VARCHAR" property="hosR_name" />
     <result column="hosR_idCard" jdbcType="VARCHAR" property="hosR_idCard" />
     <result column="hosR_medical" jdbcType="VARCHAR" property="hosR_medical" />
     <result column="hosR_regPrice" jdbcType="DOUBLE" property="hosR_regPrice" />
@@ -13,6 +14,7 @@
     <result column="hosR_work" jdbcType="VARCHAR" property="hosR_work" />
     <result column="hosR_lookState" jdbcType="INTEGER" property="hosR_lookState" />
     <result column="d_id" jdbcType="INTEGER" property="d_id" />
+    <result column="hosR_time" jdbcType="TIMESTAMP" property="hosR_time" />
     <result column="k_id" jdbcType="INTEGER" property="k_id" />
     <result column="hosR_remark" jdbcType="VARCHAR" property="hosR_remark" />
     <result column="hosR_state" jdbcType="INTEGER" property="hosR_state" />
@@ -76,8 +78,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    hosR_id, hosR_idCard, hosR_medical, hosR_regPrice, hosR_phone, hosR_selfPrice, hosR_sex, 
-    hosR_age, hosR_work, hosR_lookState, d_id, k_id, hosR_remark, hosR_state
+    hosR_id, hosR_name, hosR_idCard, hosR_medical, hosR_regPrice, hosR_phone, hosR_selfPrice, 
+    hosR_sex, hosR_age, hosR_work, hosR_lookState, d_id, hosR_time, k_id, hosR_remark, 
+    hosR_state
   </sql>
   <select id="selectByExample" parameterType="com.yiyuan.pojo.HosregisterExample" resultMap="BaseResultMap">
     select
@@ -110,22 +113,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.yiyuan.pojo.Hosregister">
-    insert into hosregister (hosR_id, hosR_idCard, hosR_medical, 
-      hosR_regPrice, hosR_phone, hosR_selfPrice, 
-      hosR_sex, hosR_age, hosR_work, 
-      hosR_lookState, d_id, k_id, 
-      hosR_remark, hosR_state)
-    values (#{hosR_id,jdbcType=INTEGER}, #{hosR_idCard,jdbcType=VARCHAR}, #{hosR_medical,jdbcType=VARCHAR}, 
-      #{hosR_regPrice,jdbcType=DOUBLE}, #{hosR_phone,jdbcType=VARCHAR}, #{hosR_selfPrice,jdbcType=INTEGER}, 
-      #{hosR_sex,jdbcType=INTEGER}, #{hosR_age,jdbcType=INTEGER}, #{hosR_work,jdbcType=VARCHAR}, 
-      #{hosR_lookState,jdbcType=INTEGER}, #{d_id,jdbcType=INTEGER}, #{k_id,jdbcType=INTEGER}, 
-      #{hosR_remark,jdbcType=VARCHAR}, #{hosR_state,jdbcType=INTEGER})
+    insert into hosregister (hosR_id, hosR_name, hosR_idCard, 
+      hosR_medical, hosR_regPrice, hosR_phone, 
+      hosR_selfPrice, hosR_sex, hosR_age, 
+      hosR_work, hosR_lookState, d_id, 
+      hosR_time, k_id, hosR_remark, 
+      hosR_state)
+    values (#{hosR_id,jdbcType=INTEGER}, #{hosR_name,jdbcType=VARCHAR}, #{hosR_idCard,jdbcType=VARCHAR}, 
+      #{hosR_medical,jdbcType=VARCHAR}, #{hosR_regPrice,jdbcType=DOUBLE}, #{hosR_phone,jdbcType=VARCHAR}, 
+      #{hosR_selfPrice,jdbcType=INTEGER}, #{hosR_sex,jdbcType=INTEGER}, #{hosR_age,jdbcType=INTEGER}, 
+      #{hosR_work,jdbcType=VARCHAR}, #{hosR_lookState,jdbcType=INTEGER}, #{d_id,jdbcType=INTEGER}, 
+      #{hosR_time,jdbcType=TIMESTAMP}, #{k_id,jdbcType=INTEGER}, #{hosR_remark,jdbcType=VARCHAR}, 
+      #{hosR_state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yiyuan.pojo.Hosregister">
     insert into hosregister
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="hosR_id != null">
         hosR_id,
+      </if>
+      <if test="hosR_name != null">
+        hosR_name,
       </if>
       <if test="hosR_idCard != null">
         hosR_idCard,
@@ -157,6 +165,9 @@
       <if test="d_id != null">
         d_id,
       </if>
+      <if test="hosR_time != null">
+        hosR_time,
+      </if>
       <if test="k_id != null">
         k_id,
       </if>
@@ -170,6 +181,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="hosR_id != null">
         #{hosR_id,jdbcType=INTEGER},
+      </if>
+      <if test="hosR_name != null">
+        #{hosR_name,jdbcType=VARCHAR},
       </if>
       <if test="hosR_idCard != null">
         #{hosR_idCard,jdbcType=VARCHAR},
@@ -201,6 +215,9 @@
       <if test="d_id != null">
         #{d_id,jdbcType=INTEGER},
       </if>
+      <if test="hosR_time != null">
+        #{hosR_time,jdbcType=TIMESTAMP},
+      </if>
       <if test="k_id != null">
         #{k_id,jdbcType=INTEGER},
       </if>
@@ -223,6 +240,9 @@
     <set>
       <if test="record.hosR_id != null">
         hosR_id = #{record.hosR_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hosR_name != null">
+        hosR_name = #{record.hosR_name,jdbcType=VARCHAR},
       </if>
       <if test="record.hosR_idCard != null">
         hosR_idCard = #{record.hosR_idCard,jdbcType=VARCHAR},
@@ -254,6 +274,9 @@
       <if test="record.d_id != null">
         d_id = #{record.d_id,jdbcType=INTEGER},
       </if>
+      <if test="record.hosR_time != null">
+        hosR_time = #{record.hosR_time,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.k_id != null">
         k_id = #{record.k_id,jdbcType=INTEGER},
       </if>
@@ -271,6 +294,7 @@
   <update id="updateByExample" parameterType="map">
     update hosregister
     set hosR_id = #{record.hosR_id,jdbcType=INTEGER},
+      hosR_name = #{record.hosR_name,jdbcType=VARCHAR},
       hosR_idCard = #{record.hosR_idCard,jdbcType=VARCHAR},
       hosR_medical = #{record.hosR_medical,jdbcType=VARCHAR},
       hosR_regPrice = #{record.hosR_regPrice,jdbcType=DOUBLE},
@@ -281,6 +305,7 @@
       hosR_work = #{record.hosR_work,jdbcType=VARCHAR},
       hosR_lookState = #{record.hosR_lookState,jdbcType=INTEGER},
       d_id = #{record.d_id,jdbcType=INTEGER},
+      hosR_time = #{record.hosR_time,jdbcType=TIMESTAMP},
       k_id = #{record.k_id,jdbcType=INTEGER},
       hosR_remark = #{record.hosR_remark,jdbcType=VARCHAR},
       hosR_state = #{record.hosR_state,jdbcType=INTEGER}
@@ -291,6 +316,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yiyuan.pojo.Hosregister">
     update hosregister
     <set>
+      <if test="hosR_name != null">
+        hosR_name = #{hosR_name,jdbcType=VARCHAR},
+      </if>
       <if test="hosR_idCard != null">
         hosR_idCard = #{hosR_idCard,jdbcType=VARCHAR},
       </if>
@@ -321,6 +349,9 @@
       <if test="d_id != null">
         d_id = #{d_id,jdbcType=INTEGER},
       </if>
+      <if test="hosR_time != null">
+        hosR_time = #{hosR_time,jdbcType=TIMESTAMP},
+      </if>
       <if test="k_id != null">
         k_id = #{k_id,jdbcType=INTEGER},
       </if>
@@ -335,7 +366,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yiyuan.pojo.Hosregister">
     update hosregister
-    set hosR_idCard = #{hosR_idCard,jdbcType=VARCHAR},
+    set hosR_name = #{hosR_name,jdbcType=VARCHAR},
+      hosR_idCard = #{hosR_idCard,jdbcType=VARCHAR},
       hosR_medical = #{hosR_medical,jdbcType=VARCHAR},
       hosR_regPrice = #{hosR_regPrice,jdbcType=DOUBLE},
       hosR_phone = #{hosR_phone,jdbcType=VARCHAR},
@@ -345,6 +377,7 @@
       hosR_work = #{hosR_work,jdbcType=VARCHAR},
       hosR_lookState = #{hosR_lookState,jdbcType=INTEGER},
       d_id = #{d_id,jdbcType=INTEGER},
+      hosR_time = #{hosR_time,jdbcType=TIMESTAMP},
       k_id = #{k_id,jdbcType=INTEGER},
       hosR_remark = #{hosR_remark,jdbcType=VARCHAR},
       hosR_state = #{hosR_state,jdbcType=INTEGER}

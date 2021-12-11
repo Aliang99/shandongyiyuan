@@ -1,9 +1,14 @@
 package com.yiyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Doctor {
     private Integer d_id;
+
+    private String d_name;
 
     private String d_idCard;
 
@@ -13,6 +18,8 @@ public class Doctor {
 
     private Integer d_sex;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT")
     private Date d_birthday;
 
     private Integer d_age;
@@ -25,6 +32,8 @@ public class Doctor {
 
     private String d_desc;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT")
     private Date d_inTime;
 
     private Integer d_state;
@@ -35,6 +44,14 @@ public class Doctor {
 
     public void setD_id(Integer d_id) {
         this.d_id = d_id;
+    }
+
+    public String getD_name() {
+        return d_name;
+    }
+
+    public void setD_name(String d_name) {
+        this.d_name = d_name == null ? null : d_name.trim();
     }
 
     public String getD_idCard() {
@@ -137,6 +154,7 @@ public class Doctor {
     public String toString() {
         return "Doctor{" +
                 "d_id=" + d_id +
+                ", d_name='" + d_name + '\'' +
                 ", d_idCard='" + d_idCard + '\'' +
                 ", d_phone='" + d_phone + '\'' +
                 ", d_telphone='" + d_telphone + '\'' +

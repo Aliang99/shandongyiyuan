@@ -70,28 +70,28 @@
 </head>
 <body>
 
-<form action="index.html" method="post" class="definewidth m20">
+<form id="myForm" class="definewidth m20">
 <table class="table table-bordered table-hover definewidth m10">
     <tr>
         <td width="10%" class="tableleft">病历号：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="hosRId" value=""/></td>
 		
         <td width="10%" class="tableleft">主治医生：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="dName" value=""/></td>
 		
         <td width="10%" class="tableleft">科室：</td>
-        <td><input type="text" name="pname" value=""/></td>
+        <td><input type="text" name="keshiName" value=""/></td>
+        <input type="hidden" name="pageNum" id="pageNum" value="1">
+        <input type="hidden" name="pageSize" id="pageSize" value="1">
     </tr>
     <tr>
-		
         <td width="10%" class="tableleft">挂号时间：</td>
-		
 		  <td colspan="5">
-			<input type="text" name="pname" value=""/>&nbsp;至&nbsp;<input type="text" name="pname" value=""/>
+			<input type="date" name="beginTime" value=""/>&nbsp;至&nbsp;<input type="date" name="endTime" value=""/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" class="btn btn-primary" type="button">查询</button> 
-            <button type="submit" class="btn btn-primary" type="button">清空</button> 
-			
+            <button id="submit-btn" class="btn btn-primary" type="button">查询</button>
+            <button class="btn btn-primary" type="reset">清空</button>
+
         </td>
     </tr>
 </table>
@@ -109,67 +109,160 @@
         <th>操作</th>
     </tr>
     </thead>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1103</td>
-            <td style="vertical-align:middle;">程俊</td>
-            <td style="vertical-align:middle;">2015-09-09 12：12：12</td>
-            <td style="vertical-align:middle;">血液科</td>
-            <td style="vertical-align:middle;">已挂号</td>
-            <td style="vertical-align:middle;"><a href="look.html">详情>>></a>&nbsp;&nbsp;&nbsp;<a href="edit.html">更改</a>&nbsp;&nbsp;&nbsp;<a href="javascript:alert('退号成功！');">退号</a></td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1104</td>
-            <td style="vertical-align:middle;">王博</td>
-            <td style="vertical-align:middle;">2015-12-09 12：12：12</td>
-            <td style="vertical-align:middle;">骨科</td>
-            <td style="vertical-align:middle;">已住院</td>
-            <td style="vertical-align:middle;"><a href="look.html">详情>>></a>&nbsp;&nbsp;&nbsp;<a href="edit.html">更改</a></td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1105</td>
-            <td style="vertical-align:middle;">沈青川</td>
-            <td style="vertical-align:middle;">2015-02-04 15：11：12</td>
-            <td style="vertical-align:middle;">外科</td>
-            <td style="vertical-align:middle;">已住院</td>
-            <td style="vertical-align:middle;"><a href="look.html">详情>>></a>&nbsp;&nbsp;&nbsp;<a href="edit.html">更改</a></td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1106</td>
-            <td style="vertical-align:middle;">欧阳雨露</td>
-            <td style="vertical-align:middle;">2014-09-05 12：12：12</td>
-            <td style="vertical-align:middle;">急诊科</td>
-            <td style="vertical-align:middle;">已出院</td>
-            <td style="vertical-align:middle;"><a href="look.html">详情>>></td>
-        </tr>
-	     <tr >
-         	<td style="vertical-align:middle;"><input type="checkbox" name="check" value="1"></td>
-            <td style="vertical-align:middle;">1107</td>
-            <td style="vertical-align:middle;">艾小天</td>
-            <td style="vertical-align:middle;">2014-02-09 12：12：11</td>
-            <td style="vertical-align:middle;">妇科</td>
-            <td style="vertical-align:middle;">已退号</td>
-            <td style="vertical-align:middle;"><a href="look.html">详情>>></td>
-        </tr>
+    <tbody id="tbody">
+
+    </tbody>
   </table>
   
   <table class="table table-bordered table-hover definewidth m10" >
-  	<tr><th colspan="5">  <div class="inline pull-right page">
-          <a href='#' >第一页</a> <a href='#'>上一页</a>     <span class='current'>1</span><a href='#'>2</a><a href='/chinapost/index.php?m=Label&a=index&p=3'>3</a><a href='#'>4</a><a href='#'>5</a>  <a href='#' >下一页</a> <a href='#' >最后一页</a>
-		  &nbsp;&nbsp;&nbsp;共<span class='current'>32</span>条记录<span class='current'> 1/33 </span>页
-		  </div>
-		 <div><button type="button" class="btn btn-success" id="newNav">门诊挂号</button>&nbsp;&nbsp;&nbsp;
-		 <button type="button" class="btn btn-success" id="delPro" onClick="delAll();">退号</button>&nbsp;&nbsp;&nbsp;
-		 <button type="button" class="btn btn-success" id="delPro">导出Excel</button>
-		
-		 
-		 </div>
-		 
-		 </th></tr>
+  	<tr>
+        <th colspan="12">
+            <div class="inline pull-right page">
+                <a href="javascript:void(0)" id="firstPage">首页</a>
+                <a href="javascript:void(0)" id="prePage">上一页</a>
+                <div id="pageDiv" style="display:inline-block"></div>
+                <a href="javascript:void(0)" id="nextPage">下一页</a>
+                <a href="javascript:void(0)" id="lastPage" >最后一页</a>
+                  &nbsp;&nbsp;&nbsp;共<span id="total" class='current'>32</span>条记录
+                <span class='current' id="num">1</span>/<span class="current" id="pages">33</span>页
+            </div>
+             <div>
+                 <button type="button" class="btn btn-success" id="newNav">门诊挂号</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-success" id="delPro" onClick="delAll();">退号</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-success" id="excel">导出Excel</button>
+             </div>
+
+		 </th>
+    </tr>
   </table>
-  
+  <script>
+      $(function(){
+          var url = document.location.toString();
+          var pageNum=getValue(url,"pageNum"); //从url中获取pageNum
+          var pageSize=getValue(url,"pageSize");//从url中获取pageSize
+          if(pageNum!=null&& $("#pageNum").val()!=null){
+              $("#pageNum").val(pageNum);
+          }
+          if(pageSize!=null&& $("#pageSize").val()!=null){
+              $("#pageSize").val(pageSize);
+          }
+          loadData(); //首次进入页面，获取数据
+          $("#submit-btn").click(function () {
+              //点击查询按钮，获取数据
+              loadData();
+          });
+          $("a").click(function(){
+              var num=$(this).attr("name");
+              $("#pageNum").val(num);
+              loadData();
+          });
+          //注意： jquery动态添加的标签，需要使用on函数才能绑定事件
+          $("#pageDiv").on("click",".numa",function(){
+              //点击页码获取数据
+              var num=$(this).attr("name");
+              $("#pageNum").val(num);
+              loadData();
+          });
+      });
+      // 获取url地址中的参数
+      function getValue(url,para) {
+          var reg = new RegExp("(^|&)"+ para +"=([^&]*)(&|$)");
+          var r = url.substr(url.indexOf("\?")+1).match(reg);
+          if (r!=null) return unescape(r[2]);
+          return null;
+      }
+      //填充分页信息
+      function fillPageData(pageInfo) {
+          //填充信息
+          $("#total").html(pageInfo.total); //总条数
+          $("#pages").html(pageInfo.pages); //总页数
+          $("#pageNum").html(pageInfo.pageNum); //当前页
+          $("#num").html(pageInfo.pageNum); //当前页/总页数 的当前页
+          //设置按钮的属性值和样式
+          $("#firstPage").attr("name",1);
+          $("#prePage").attr("name",pageInfo.prePage);
+          $("#nextPage").attr("name",pageInfo.nextPage);
+          $("#lastPage").attr("name",pageInfo.pages);
+          $("#firstPage").removeClass("hidden");
+          $("#prePage").removeClass("hidden");
+          $("#nextPage").removeClass("hidden");
+          $("#lastPage").removeClass("hidden");
+          if(pageInfo.isFirstPage){//如果是第一页：上一页和首页隐藏
+              $("#firstPage").addClass("hidden");
+              $("#prePage").addClass("hidden");
+          }
+          if(pageInfo.isLastPage){//如果已经是最后一页：下一页和末页隐藏
+              $("#nextPage").addClass("hidden");
+              $("#lastPage").addClass("hidden");
+          }
+          // 获取页码集合
+          var nums = pageInfo.navigatepageNums;
+          var strs="";
+          //添加全部页码到页面上，供点击
+          for (var i=0;i<nums.length;i++){
+              if ($("#num").text() == i+1)
+                  strs+="<a href=\"javascript:void(0)\" class=\"numa current\" name=\""+(i+1)+"\">"+(i+1)+"</a>";
+              else
+                  strs+="<a href=\"javascript:void(0)\" class='numa' name=\""+(i+1)+"\">"+(i+1)+"</a>";
+          }
+          $("#pageDiv").html(strs); //追加在后面
+
+      }
+      // 条件查询
+      function loadData(){
+          $.ajax({
+              type: "GET",
+              url: "/hosregister/list",
+              data: $("#myForm").serialize(),//主要是分页和多条件参数数据
+              dataType:"json",
+              success: function(vo){
+                  if (vo.status==200){ // 请求成功
+                      var list = vo.pageInfo.list;
+                      var str="";
+                      for (var i=0;i<list.length;i++) {
+                          var listKey=list[i];
+                          var hosrId = listKey.hosR_id;
+                          var doctorName = listKey.d_Name;
+                          var time = listKey.hosR_time;
+                          var keshi = listKey.k_Name;
+                          var state = listKey.hosR_state;
+                          //填充数据项
+                          str += "<tr>" +
+                              "         <td style=\"vertical-align:middle;\">" +
+                              "            <input type=\"checkbox\" name=\"check\" value=\"1\"></td>" +
+                              "            <td style=\"vertical-align:middle;\">"+hosrId+"</td>" +
+                              "            <td style=\"vertical-align:middle;\">"+doctorName+"</td>" +
+                              "            <td style=\"vertical-align:middle;\">"+time+"</td>" +
+                              "            <td style=\"vertical-align:middle;\">"+keshi+"</td>";
+                          // 拼接状态列内容
+                          switch (state) {
+                              case 0:str+="<td style=\"vertical-align:middle;\">已挂号</td>";break;
+                              case 1:str+="<td style=\"vertical-align:middle;\">已住院</td>";break;
+                              case 2:str+="<td style=\"vertical-align:middle;\">已出院</td>";break;
+                              case 3:str+="<td style=\"vertical-align:middle;\">已退号</td>";break;
+                          }
+                          //拼接操作 ，如果已经退号就不显示退号功能
+                          if (state!=3){
+                              str +="<td style=\"vertical-align:middle;\">\n" +
+                                  "                                  <a href=\"look.html?hosrId="+hosrId+"\">详情>>></a>&nbsp;&nbsp;&nbsp;\n" +
+                                  "                                  <a href=\"edit.html?hosrId="+hosrId+"\">更改</a>&nbsp;&nbsp;&nbsp;\n" +
+                                  "                                  <a href=\"javascript:alert('退号成功！');\">退号</a>\n" +
+                                  "                          </td>";
+                          }else{
+                              str+="<td style=\"vertical-align:middle;\">\n" +
+                                  "                                  <a href=\"look.html?hosrId="+hosrId+"\">详情>>></a>&nbsp;&nbsp;&nbsp;\n" +
+                                  "                                  <a href=\"edit.html?hosrId="+hosrId+"\">更改</a>&nbsp;&nbsp;&nbsp;\n" +
+                                  "                          </td>";
+                          }
+                      }
+                      //将拼接好的字符串填充到表格中
+                      $("#tbody").html(str);
+                      // 填充分页项
+                      fillPageData(vo.pageInfo);
+                  }
+              }
+          });
+      }
+  </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.yiyuan.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HosregisterExample {
@@ -161,6 +162,76 @@ public class HosregisterExample {
 
         public Criteria andHosR_idNotBetween(Integer value1, Integer value2) {
             addCriterion("hosR_id not between", value1, value2, "hosR_id");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameIsNull() {
+            addCriterion("hosR_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameIsNotNull() {
+            addCriterion("hosR_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameEqualTo(String value) {
+            addCriterion("hosR_name =", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameNotEqualTo(String value) {
+            addCriterion("hosR_name <>", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameGreaterThan(String value) {
+            addCriterion("hosR_name >", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameGreaterThanOrEqualTo(String value) {
+            addCriterion("hosR_name >=", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameLessThan(String value) {
+            addCriterion("hosR_name <", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameLessThanOrEqualTo(String value) {
+            addCriterion("hosR_name <=", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameLike(String value) {
+            addCriterion("hosR_name like", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameNotLike(String value) {
+            addCriterion("hosR_name not like", value, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameIn(List<String> values) {
+            addCriterion("hosR_name in", values, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameNotIn(List<String> values) {
+            addCriterion("hosR_name not in", values, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameBetween(String value1, String value2) {
+            addCriterion("hosR_name between", value1, value2, "hosR_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_nameNotBetween(String value1, String value2) {
+            addCriterion("hosR_name not between", value1, value2, "hosR_name");
             return (Criteria) this;
         }
 
@@ -801,6 +872,66 @@ public class HosregisterExample {
 
         public Criteria andD_idNotBetween(Integer value1, Integer value2) {
             addCriterion("d_id not between", value1, value2, "d_id");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeIsNull() {
+            addCriterion("hosR_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeIsNotNull() {
+            addCriterion("hosR_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeEqualTo(Date value) {
+            addCriterion("hosR_time =", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeNotEqualTo(Date value) {
+            addCriterion("hosR_time <>", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeGreaterThan(Date value) {
+            addCriterion("hosR_time >", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeGreaterThanOrEqualTo(Date value) {
+            addCriterion("hosR_time >=", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeLessThan(Date value) {
+            addCriterion("hosR_time <", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeLessThanOrEqualTo(Date value) {
+            addCriterion("hosR_time <=", value, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeIn(List<Date> values) {
+            addCriterion("hosR_time in", values, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeNotIn(List<Date> values) {
+            addCriterion("hosR_time not in", values, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeBetween(Date value1, Date value2) {
+            addCriterion("hosR_time between", value1, value2, "hosR_time");
+            return (Criteria) this;
+        }
+
+        public Criteria andHosR_timeNotBetween(Date value1, Date value2) {
+            addCriterion("hosR_time not between", value1, value2, "hosR_time");
             return (Criteria) this;
         }
 

@@ -28,7 +28,7 @@
     <!--  3、配置映射地址-->
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <!--  4、配置全部请求为Restful风格URI-->
@@ -60,6 +60,6 @@
     </filter>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

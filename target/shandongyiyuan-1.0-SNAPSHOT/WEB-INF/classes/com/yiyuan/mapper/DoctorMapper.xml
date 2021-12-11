@@ -3,6 +3,7 @@
 <mapper namespace="com.yiyuan.mapper.DoctorMapper">
   <resultMap id="BaseResultMap" type="com.yiyuan.pojo.Doctor">
     <id column="d_id" jdbcType="INTEGER" property="d_id" />
+    <result column="d_name" jdbcType="VARCHAR" property="d_name" />
     <result column="d_idCard" jdbcType="VARCHAR" property="d_idCard" />
     <result column="d_phone" jdbcType="VARCHAR" property="d_phone" />
     <result column="d_telphone" jdbcType="VARCHAR" property="d_telphone" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    d_id, d_idCard, d_phone, d_telphone, d_sex, d_birthday, d_age, d_email, k_id, x_id, 
-    d_desc, d_inTime, d_state
+    d_id, d_name, d_idCard, d_phone, d_telphone, d_sex, d_birthday, d_age, d_email, k_id, 
+    x_id, d_desc, d_inTime, d_state
   </sql>
   <select id="selectByExample" parameterType="com.yiyuan.pojo.DoctorExample" resultMap="BaseResultMap">
     select
@@ -109,22 +110,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.yiyuan.pojo.Doctor">
-    insert into doctor (d_id, d_idCard, d_phone, 
-      d_telphone, d_sex, d_birthday, 
-      d_age, d_email, k_id, 
-      x_id, d_desc, d_inTime, 
-      d_state)
-    values (#{d_id,jdbcType=INTEGER}, #{d_idCard,jdbcType=VARCHAR}, #{d_phone,jdbcType=VARCHAR}, 
-      #{d_telphone,jdbcType=VARCHAR}, #{d_sex,jdbcType=INTEGER}, #{d_birthday,jdbcType=TIMESTAMP}, 
-      #{d_age,jdbcType=INTEGER}, #{d_email,jdbcType=VARCHAR}, #{k_id,jdbcType=INTEGER}, 
-      #{x_id,jdbcType=INTEGER}, #{d_desc,jdbcType=VARCHAR}, #{d_inTime,jdbcType=TIMESTAMP}, 
-      #{d_state,jdbcType=INTEGER})
+    insert into doctor (d_id, d_name, d_idCard, 
+      d_phone, d_telphone, d_sex, 
+      d_birthday, d_age, d_email, 
+      k_id, x_id, d_desc, 
+      d_inTime, d_state)
+    values (#{d_id,jdbcType=INTEGER}, #{d_name,jdbcType=VARCHAR}, #{d_idCard,jdbcType=VARCHAR}, 
+      #{d_phone,jdbcType=VARCHAR}, #{d_telphone,jdbcType=VARCHAR}, #{d_sex,jdbcType=INTEGER}, 
+      #{d_birthday,jdbcType=TIMESTAMP}, #{d_age,jdbcType=INTEGER}, #{d_email,jdbcType=VARCHAR}, 
+      #{k_id,jdbcType=INTEGER}, #{x_id,jdbcType=INTEGER}, #{d_desc,jdbcType=VARCHAR}, 
+      #{d_inTime,jdbcType=TIMESTAMP}, #{d_state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yiyuan.pojo.Doctor">
     insert into doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="d_id != null">
         d_id,
+      </if>
+      <if test="d_name != null">
+        d_name,
       </if>
       <if test="d_idCard != null">
         d_idCard,
@@ -166,6 +170,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="d_id != null">
         #{d_id,jdbcType=INTEGER},
+      </if>
+      <if test="d_name != null">
+        #{d_name,jdbcType=VARCHAR},
       </if>
       <if test="d_idCard != null">
         #{d_idCard,jdbcType=VARCHAR},
@@ -217,6 +224,9 @@
       <if test="record.d_id != null">
         d_id = #{record.d_id,jdbcType=INTEGER},
       </if>
+      <if test="record.d_name != null">
+        d_name = #{record.d_name,jdbcType=VARCHAR},
+      </if>
       <if test="record.d_idCard != null">
         d_idCard = #{record.d_idCard,jdbcType=VARCHAR},
       </if>
@@ -261,6 +271,7 @@
   <update id="updateByExample" parameterType="map">
     update doctor
     set d_id = #{record.d_id,jdbcType=INTEGER},
+      d_name = #{record.d_name,jdbcType=VARCHAR},
       d_idCard = #{record.d_idCard,jdbcType=VARCHAR},
       d_phone = #{record.d_phone,jdbcType=VARCHAR},
       d_telphone = #{record.d_telphone,jdbcType=VARCHAR},
@@ -280,6 +291,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yiyuan.pojo.Doctor">
     update doctor
     <set>
+      <if test="d_name != null">
+        d_name = #{d_name,jdbcType=VARCHAR},
+      </if>
       <if test="d_idCard != null">
         d_idCard = #{d_idCard,jdbcType=VARCHAR},
       </if>
@@ -321,7 +335,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yiyuan.pojo.Doctor">
     update doctor
-    set d_idCard = #{d_idCard,jdbcType=VARCHAR},
+    set d_name = #{d_name,jdbcType=VARCHAR},
+      d_idCard = #{d_idCard,jdbcType=VARCHAR},
       d_phone = #{d_phone,jdbcType=VARCHAR},
       d_telphone = #{d_telphone,jdbcType=VARCHAR},
       d_sex = #{d_sex,jdbcType=INTEGER},
