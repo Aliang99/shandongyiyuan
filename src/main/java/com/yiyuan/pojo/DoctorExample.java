@@ -165,6 +165,76 @@ public class DoctorExample {
             return (Criteria) this;
         }
 
+        public Criteria andD_nameIsNull() {
+            addCriterion("d_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameIsNotNull() {
+            addCriterion("d_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameEqualTo(String value) {
+            addCriterion("d_name =", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameNotEqualTo(String value) {
+            addCriterion("d_name <>", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameGreaterThan(String value) {
+            addCriterion("d_name >", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameGreaterThanOrEqualTo(String value) {
+            addCriterion("d_name >=", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameLessThan(String value) {
+            addCriterion("d_name <", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameLessThanOrEqualTo(String value) {
+            addCriterion("d_name <=", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameLike(String value) {
+            addCriterion("d_name like", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameNotLike(String value) {
+            addCriterion("d_name not like", value, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameIn(List<String> values) {
+            addCriterion("d_name in", values, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameNotIn(List<String> values) {
+            addCriterion("d_name not in", values, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameBetween(String value1, String value2) {
+            addCriterion("d_name between", value1, value2, "d_name");
+            return (Criteria) this;
+        }
+
+        public Criteria andD_nameNotBetween(String value1, String value2) {
+            addCriterion("d_name not between", value1, value2, "d_name");
+            return (Criteria) this;
+        }
+
         public Criteria andD_idCardIsNull() {
             addCriterion("d_idCard is null");
             return (Criteria) this;

@@ -1,33 +1,35 @@
 package com.yiyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Hosregister {
     private Integer hosR_id;
-
+    private String hosR_name;
     private String hosR_idCard;
-
     private String hosR_medical;
-
     private Double hosR_regPrice;
-
     private String hosR_phone;
-
     private Integer hosR_selfPrice;
-
     private Integer hosR_sex;
-
     private Integer hosR_age;
-
     private String hosR_work;
-
     private Integer hosR_lookState;
-
     private Integer d_id;
-
+    private String d_Name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT")
+    private Date hosR_time;
     private Integer k_id;
-
+    private String k_Name;
     private String hosR_remark;
-
     private Integer hosR_state;
+
+
+
+
 
     public Integer getHosR_id() {
         return hosR_id;
@@ -35,6 +37,14 @@ public class Hosregister {
 
     public void setHosR_id(Integer hosR_id) {
         this.hosR_id = hosR_id;
+    }
+
+    public String getHosR_name() {
+        return hosR_name;
+    }
+
+    public void setHosR_name(String hosR_name) {
+        this.hosR_name = hosR_name == null ? null : hosR_name.trim();
     }
 
     public String getHosR_idCard() {
@@ -117,6 +127,14 @@ public class Hosregister {
         this.d_id = d_id;
     }
 
+    public Date getHosR_time() {
+        return hosR_time;
+    }
+
+    public void setHosR_time(Date hosR_time) {
+        this.hosR_time = hosR_time;
+    }
+
     public Integer getK_id() {
         return k_id;
     }
@@ -139,5 +157,21 @@ public class Hosregister {
 
     public void setHosR_state(Integer hosR_state) {
         this.hosR_state = hosR_state;
+    }
+
+    public String getD_Name() {
+        return d_Name;
+    }
+
+    public void setD_Name(String d_Name) {
+        this.d_Name = d_Name;
+    }
+
+    public String getK_Name() {
+        return k_Name;
+    }
+
+    public void setK_Name(String k_Name) {
+        this.k_Name = k_Name;
     }
 }
