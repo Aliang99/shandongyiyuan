@@ -229,7 +229,7 @@
                           //填充数据项
                           str += "<tr>" +
                               "         <td style=\"vertical-align:middle;\">" +
-                              "            <input type=\"checkbox\" name=\"check\" value=\"1\"></td>" +
+                              "            <input type=\"checkbox\" name=\"check\" value=\""+hosrId+"\"></td>" +
                               "            <td style=\"vertical-align:middle;\">"+hosrId+"</td>" +
                               "            <td style=\"vertical-align:middle;\">"+doctorName+"</td>" +
                               "            <td style=\"vertical-align:middle;\">"+time+"</td>" +
@@ -246,7 +246,7 @@
                               str +="<td style=\"vertical-align:middle;\">\n" +
                                   "                                  <a href=\"look.html?hosrId="+hosrId+"\">详情>>></a>&nbsp;&nbsp;&nbsp;\n" +
                                   "                                  <a href=\"edit.html?hosrId="+hosrId+"\">更改</a>&nbsp;&nbsp;&nbsp;\n" +
-                                  "                                  <a href=\"javascript:alert('退号成功！');\">退号</a>\n" +
+                                  "                                  <a href=# onClick=\"delbyId("+hosrId+"); \">退号</a>\n" +
                                   "                          </td>";
                           }else{
                               str+="<td style=\"vertical-align:middle;\">\n" +
@@ -262,6 +262,25 @@
                   }
               }
           });
+      }
+      function delbyId(id){
+          $.ajax({
+              type: "POST",
+              url: "/hosregister/"+id,
+              data: $("#myForm").serialize()+"&_method=DELETE",//主要是分页和多条件参数数据
+              dataType:"json",
+              success: function(vo){
+                  if (vo.status==200){ // 请求成功
+                      alert(vo.msg);
+                      loadData();
+                  }else{
+                      alert(vo.msg);
+                  }
+              }
+          });
+      }
+      function delAll(){
+
       }
   </script>
 </body>

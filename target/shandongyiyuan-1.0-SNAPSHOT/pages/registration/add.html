@@ -146,7 +146,7 @@
         console.log(keshi);
         $.ajax({
             type: "GET",
-            url: "/doctor/queryByKID/"+keshi,
+            url: "/doctor/"+keshi,
             dataType:"json",
             success: function(vo) {
                 if(vo.status == 200){

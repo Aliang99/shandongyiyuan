@@ -90,6 +90,7 @@ public class HosregisterService {
                 hosregisterExampleCriteria.andHosR_timeLessThanOrEqualTo(vo.getEndTime());
             }
         }
+        hosregisterExample.setOrderByClause("hosR_state");
         //获取分页数据
         PageHelper.startPage(pageNum,pageSize);
         //条件准备之后，查询数据库
@@ -98,8 +99,16 @@ public class HosregisterService {
         PageInfo<Hosregister> pageInfo = new PageInfo<>(hosregisters);
         //将分页对象中的科室id以及医生id，查询数据库后获取中文名
         pageInfo.getList().forEach(hosregister -> {
-            hosregister.setD_Name(doctorMapper.selectByPrimaryKey(hosregister.getD_id()).getD_name());
-            hosregister.setK_Name(keshiMapper.selectByPrimaryKey(hosregister.getK_id()).getKeshi_name());
+            Doctor doctor = doctorMapper.selectByPrimaryKey(hosregister.getD_id());
+            if (doctor==null)
+                hosregister.setD_Name("未指定医生");
+            else
+                hosregister.setD_Name(doctor.getD_name());
+            Keshi keshi = keshiMapper.selectByPrimaryKey(hosregister.getK_id());
+            if (keshi==null)
+                hosregister.setK_Name("未指定科室");
+            else
+                hosregister.setK_Name(keshi.getKeshi_name());
         });
         return pageInfo;
     }
@@ -134,5 +143,33 @@ public class HosregisterService {
         }
         int insert = hosregisterMapper.insert(hosregister);
         return insert;
+    }
+
+    /**
+     * 更新挂号信息
+     * @param hosregister
+     * @return
+     */
+    public Integer updatehosregister(Hosregister hosregister){
+        if ("".equals(hosregister.getHosR_work().trim())){
+            hosregister.setHosR_work("无工作");
+        }
+        int update = hosregisterMapper.updateByPrimaryKeySelective(hosregister);
+        return update;
+    }
+
+    /**
+     * 退号
+     * @param id
+     * @return
+     */
+    public Integer delhosregister(Integer id){
+
+        Hosregister hosregister = new Hosregister();
+        hosregister.setHosR_state(3); //状态码为3 表示退号
+        HosregisterExample example = new HosregisterExample();
+        example.createCriteria().andHosR_idEqualTo(id);
+        int update = hosregisterMapper.updateByExampleSelective(hosregister, example);
+        return update;
     }
 }

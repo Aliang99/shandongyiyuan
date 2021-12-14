@@ -29,7 +29,7 @@ public class DoctorController {
     @Autowired
     private DoctorService service;
 
-    @RequestMapping(value = "queryByKID/{KID}",method = RequestMethod.GET)
+    @RequestMapping(value = "{KID}",method = RequestMethod.GET)
     public ResultVo<Doctor> getDoctorByKID(@PathVariable("KID") Integer KID){
 
         List<Doctor> doctorByKID = service.getDoctorByKID(KID);

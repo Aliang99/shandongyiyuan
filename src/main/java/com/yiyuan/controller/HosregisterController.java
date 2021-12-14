@@ -80,4 +80,43 @@ public class HosregisterController {
         }
 
     }
+
+    /**
+     * 修改挂号信息
+     * @param hosregister
+     * @return
+     */
+    @RequestMapping(value = "updateHosregister",method = RequestMethod.PUT)
+    public ResultVo updateHosregister(Hosregister hosregister){
+        if (hosregister==null){
+            return new ResultVo("抱歉，您的参数有误，请仔细核对后再提交");
+        }
+        if (hosregister.getD_id()==-1 || hosregister.getK_id()==-1){
+            return new ResultVo("很抱歉，您未选择医生或者科室！",205);
+        }
+        Integer update = service.updatehosregister(hosregister);
+        if (update==1){
+            return new ResultVo();
+        }else{
+            return new ResultVo("数据修改有误，请联系管理员！",205);
+        }
+    }
+
+    /**
+     * 退号
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
+    public ResultVo delHosregister(@PathVariable("id")Integer id){
+        if (id==null || id<=0){
+            return new ResultVo("抱歉，您的参数有误，请仔细核对后再提交");
+        }
+        Integer del = service.delhosregister(id);
+        if (del==1){
+            return new ResultVo();
+        }else{
+            return new ResultVo("退号失败，请联系管理员！",205);
+        }
+    }
 }
