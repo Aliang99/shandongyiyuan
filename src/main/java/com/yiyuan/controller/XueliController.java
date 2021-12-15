@@ -1,31 +1,34 @@
 package com.yiyuan.controller;
 
-import com.yiyuan.pojo.Keshi;
-import com.yiyuan.service.KeshiService;
+import com.yiyuan.pojo.Xueli;
+import com.yiyuan.service.XueliService;
 import com.yiyuan.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 @Controller
-@RequestMapping("keshi")
+@RequestMapping("xueli")
 @ResponseBody
-public class KeshiController {
+public class XueliController {
 
     @Autowired
-    KeshiService service;
+    private XueliService service;
 
-    @RequestMapping(value = "all",method = RequestMethod.GET)
-    public ResultVo<Keshi> queryAll(){
-        List<Keshi> keshis = service.queryAll();
-        if (keshis==null){
+    /**
+     * 查询学历表的全部数据
+     * @return
+     */
+    @RequestMapping("all")
+    public ResultVo<Xueli> getAll(){
+        List<Xueli> all = service.getAll();
+        if (all==null){
             return new ResultVo<>("内部出现错误，请联系管理员!",500);
         }
-        return new ResultVo<>(keshis);
+        return new ResultVo<>(all);
     }
-
 }

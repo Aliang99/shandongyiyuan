@@ -18,8 +18,8 @@ public class Doctor {
 
     private Integer d_sex;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT")
     private Date d_birthday;
 
     private Integer d_age;
@@ -27,8 +27,10 @@ public class Doctor {
     private String d_email;
 
     private Integer k_id;
+    private String kName;
 
     private Integer x_id;
+    private String xName;
 
     private String d_desc;
 
@@ -150,6 +152,22 @@ public class Doctor {
         this.d_state = d_state;
     }
 
+    public String getkName() {
+        return kName;
+    }
+
+    public void setkName(String kName) {
+        this.kName = kName;
+    }
+
+    public String getxName() {
+        return xName;
+    }
+
+    public void setxName(String xName) {
+        this.xName = xName;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -163,7 +181,9 @@ public class Doctor {
                 ", d_age=" + d_age +
                 ", d_email='" + d_email + '\'' +
                 ", k_id=" + k_id +
+                ", kName='" + kName + '\'' +
                 ", x_id=" + x_id +
+                ", xName='" + xName + '\'' +
                 ", d_desc='" + d_desc + '\'' +
                 ", d_inTime=" + d_inTime +
                 ", d_state=" + d_state +

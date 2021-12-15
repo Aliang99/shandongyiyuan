@@ -2,8 +2,11 @@ package com.yiyuan.service;
 
 import com.yiyuan.mapper.KeshiMapper;
 import com.yiyuan.pojo.Keshi;
+import com.yiyuan.pojo.KeshiExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +20,13 @@ public class KeshiService {
      * @return
      */
     public List<Keshi> queryAll(){
-        return mapper.selectByExample(null);
+        KeshiExample keshiExample = new KeshiExample();
+        keshiExample.setOrderByClause("k_id");
+
+        List<Keshi> keshis = mapper.selectByExample(keshiExample);
+        if (keshis.size()==0){
+            return null;
+        }
+        return keshis;
     }
 }
