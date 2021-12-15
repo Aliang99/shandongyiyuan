@@ -7,10 +7,12 @@ import com.yiyuan.mapper.HosregisterMapper;
 import com.yiyuan.mapper.KeshiMapper;
 import com.yiyuan.pojo.*;
 import com.yiyuan.vo.HosregisterVo;
-import com.yiyuan.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -90,6 +92,7 @@ public class HosregisterService {
                 hosregisterExampleCriteria.andHosR_timeLessThanOrEqualTo(vo.getEndTime());
             }
         }
+        hosregisterExample.setOrderByClause("hosR_id");
         hosregisterExample.setOrderByClause("hosR_state");
         //获取分页数据
         PageHelper.startPage(pageNum,pageSize);
@@ -104,7 +107,7 @@ public class HosregisterService {
                 hosregister.setD_Name("未指定医生");
             else
                 hosregister.setD_Name(doctor.getD_name());
-            Keshi keshi = keshiMapper.selectByPrimaryKey(hosregister.getK_id());
+            Keshi keshi = keshiMapper.selectByPrimaryKey(doctor.getK_id());
             if (keshi==null)
                 hosregister.setK_Name("未指定科室");
             else
@@ -135,6 +138,7 @@ public class HosregisterService {
      * @param hosregister
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class})
     public Integer addhosregister(Hosregister hosregister){
         hosregister.setHosR_time(new Date()); //挂号时间
         hosregister.setHosR_state(0);//挂号状态
@@ -150,6 +154,7 @@ public class HosregisterService {
      * @param hosregister
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class})
     public Integer updatehosregister(Hosregister hosregister){
         if ("".equals(hosregister.getHosR_work().trim())){
             hosregister.setHosR_work("无工作");
@@ -163,6 +168,7 @@ public class HosregisterService {
      * @param id
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class})
     public Integer delhosregister(Integer id){
 
         Hosregister hosregister = new Hosregister();
@@ -171,5 +177,28 @@ public class HosregisterService {
         example.createCriteria().andHosR_idEqualTo(id);
         int update = hosregisterMapper.updateByExampleSelective(hosregister, example);
         return update;
+    }
+
+    /**
+     * 批量退号
+     * @param ids
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = {Exception.class})
+    public Integer delallhosregister(List<Integer> ids) {
+
+        int count=0;
+        for (Integer id : ids) {
+            Hosregister hosregister = new Hosregister();
+            hosregister.setHosR_state(3); //状态码为3 表示退号
+            HosregisterExample example = new HosregisterExample();
+            example.createCriteria().andHosR_idEqualTo(id);
+            int update = hosregisterMapper.updateByExampleSelective(hosregister, example);
+            if (update!=0){
+                count++;
+            }
+        }
+        return count;
+
     }
 }

@@ -59,9 +59,7 @@
 				}		
 			}
 			if(ids.length>0){
-				if(confirm("确认操作?")){
-					alert("成功!");
-				}
+				deleteAll(ids);
 			}else{
 				alert("请选中要操作的项");
 			}
@@ -82,7 +80,7 @@
         <td width="10%" class="tableleft">科室：</td>
         <td><input type="text" name="keshiName" value=""/></td>
         <input type="hidden" name="pageNum" id="pageNum" value="1">
-        <input type="hidden" name="pageSize" id="pageSize" value="1">
+        <input type="hidden" name="pageSize" id="pageSize" value="5">
     </tr>
     <tr>
         <td width="10%" class="tableleft">挂号时间：</td>
@@ -227,10 +225,13 @@
                           var keshi = listKey.k_Name;
                           var state = listKey.hosR_state;
                           //填充数据项
-                          str += "<tr>" +
-                              "         <td style=\"vertical-align:middle;\">" +
-                              "            <input type=\"checkbox\" name=\"check\" value=\""+hosrId+"\"></td>" +
-                              "            <td style=\"vertical-align:middle;\">"+hosrId+"</td>" +
+                          str += "<tr>";
+                          if (state != 3){
+                              str+="<td style=\"vertical-align:middle;\"><input type=\"checkbox\" name=\"check\" value=\""+hosrId+"\"></td>";
+                          }else{
+                              str+="<td style=\"vertical-align:middle;\">已退号</td>";
+                          }
+                            str+="            <td style=\"vertical-align:middle;\">"+hosrId+"</td>" +
                               "            <td style=\"vertical-align:middle;\">"+doctorName+"</td>" +
                               "            <td style=\"vertical-align:middle;\">"+time+"</td>" +
                               "            <td style=\"vertical-align:middle;\">"+keshi+"</td>";
@@ -263,6 +264,7 @@
               }
           });
       }
+      //单个退号
       function delbyId(id){
           $.ajax({
               type: "POST",
@@ -279,8 +281,23 @@
               }
           });
       }
-      function delAll(){
-
+      //批量退号
+      function deleteAll(ids){
+          console.log(ids);
+          $.ajax({
+              type: "POST",
+              url: "/hosregister/delall",
+              data: $("#myForm").serialize()+"&ids="+ids+"&_method=DELETE",//主要是分页和多条件参数数据
+              dataType:"json",
+              success: function(vo){
+                  if (vo.status==200){ // 请求成功
+                      alert(vo.msg);
+                      loadData();
+                  }else{
+                      alert(vo.msg);
+                  }
+              }
+          });
       }
   </script>
 </body>

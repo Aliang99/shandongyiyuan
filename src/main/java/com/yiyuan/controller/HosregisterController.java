@@ -7,10 +7,11 @@ import com.yiyuan.vo.HosregisterVo;
 import com.yiyuan.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.xml.transform.Result;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用于处理挂号页面的功能点
@@ -117,6 +118,26 @@ public class HosregisterController {
             return new ResultVo();
         }else{
             return new ResultVo("退号失败，请联系管理员！",205);
+        }
+    }
+
+    /**
+     * 批量退号
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "delall",method = RequestMethod.DELETE)
+    public ResultVo delallHosregister(@RequestParam("ids") List<Integer> ids){
+        if (ids==null || ids.size()<=0){
+            return new ResultVo("抱歉，您的参数有误，请仔细核对后再提交");
+        }
+        Integer del = service.delallhosregister(ids);
+        if (del==0){
+            return new ResultVo("您选择的挂号记录已是退号状态，请勿重复操作",205);
+        }else if (del == ids.size()){
+           return new ResultVo("已全部退号",200);
+        }else{
+            return new ResultVo("您选择的挂号记录包含已是退号状态的记录，请勿重复操作",205);
         }
     }
 }
